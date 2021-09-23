@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:http/http.dart' as http;
 import 'package:test_flutter/model/users.dart';
 
@@ -8,8 +10,7 @@ class UsersRepository {
     var response = await http.get(url);
 
     try {
-      print(response.body);
-      return usersFromJson(response.body);
+      return Users.fromJson(jsonDecode(response.body));
     } catch (e) {
       throw Exception(e);
     }

@@ -14,9 +14,11 @@ class UsersBloc extends Bloc<UsersEvent, UsersState> {
     if (event is LoadUser) {
       yield UserLoading();
       try {
-        final users = await UsersRepository().getUser(event.username);
+        final Users users = await UsersRepository().getUser(event.username);
+        print(users.items.length);
         yield UserLoaded(users);
       } catch (e) {
+        print(e);
         yield UserFail();
       }
     }

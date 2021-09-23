@@ -65,7 +65,7 @@ class Item {
   String receivedEventsUrl;
   String type;
   bool siteAdmin;
-  int score;
+  double score;
 
   factory Item.fromJson(Map<String, dynamic> json) => Item(
         login: json["login"],
