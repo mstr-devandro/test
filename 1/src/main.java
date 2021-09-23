@@ -28,7 +28,10 @@ public class main {
         Map<Character, Long> frequencies = stringArr.stream()
                 .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
 
-        System.out.println(frequencies);
+        Optional<Map.Entry<Character, Long>> result = frequencies.entrySet().stream()
+                .filter(entry -> entry.getValue() == 3).findFirst();
+
+        System.out.println(result);
 
     }
 }
