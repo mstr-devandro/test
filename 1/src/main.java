@@ -21,6 +21,7 @@ public class main {
             stringArr.add(charString);
         }
 
+        Collections.sort(stringArr);
 
         System.out.println(stringArr);
 
