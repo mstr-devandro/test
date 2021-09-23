@@ -68,6 +68,10 @@ class _MyHomePageState extends State<MyHomePage> {
           children: [
             TextFormField(
               controller: _controller,
+              decoration: InputDecoration(
+                hintText: 'Username',
+                prefixIcon: Icon(Icons.search),
+              ),
             ),
             Expanded(
               child: BlocBuilder<UsersBloc, UsersState>(
