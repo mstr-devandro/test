@@ -5,11 +5,12 @@ import 'package:test_flutter/model/users.dart';
 
 class UsersRepository {
   Future<Users> getUser(String username) async {
-    var url =
-        Uri.parse('https://api.github.com/search/users?q=$username&per_page=3');
+    var url = Uri.parse(
+        'https://api.github.com/search/users?q=$username&per_page=10');
     var response = await http.get(url);
 
     try {
+      print(response.body);
       return Users.fromJson(jsonDecode(response.body));
     } catch (e) {
       throw Exception(e);

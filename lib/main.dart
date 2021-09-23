@@ -69,21 +69,25 @@ class _MyHomePageState extends State<MyHomePage> {
             TextFormField(
               controller: _controller,
             ),
-            BlocBuilder<UsersBloc, UsersState>(
-              builder: (context, state) {
-                return state is UserLoaded
-                    ? ListView.builder(
-                        itemCount: 5,
-                        shrinkWrap: true,
-                        physics: NeverScrollableScrollPhysics(),
-                        itemBuilder: (context, index) {
-                          return ListTile(
-                              leading: Icon(Icons.people),
-                              title: Text('Username'));
-                        },
-                      )
-                    : Container();
-              },
+            Expanded(
+              child: BlocBuilder<UsersBloc, UsersState>(
+                builder: (context, state) {
+                  return state is UserLoaded
+                      ? ListView.builder(
+                          itemCount: state.users.items.length,
+                          itemBuilder: (context, index) {
+                            final user = state.users.items[index];
+                            return Container(
+                              margin: const EdgeInsets.symmetric(vertical: 5),
+                              child: ListTile(
+                                  leading: Image.network(user.avatarUrl),
+                                  title: Text(user.login)),
+                            );
+                          },
+                        )
+                      : Container();
+                },
+              ),
             ),
           ],
         ));
@@ -91,6 +95,6 @@ class _MyHomePageState extends State<MyHomePage> {
 
   _loadUser() {
     final username = _controller.text;
-    _userBloc.add(LoadUser(username));
+    if (username.isNotEmpty) _userBloc.add(LoadUser(username));
   }
 }
